@@ -22,7 +22,7 @@ To build these examples, you need to have a computer with software installed as 
 
 
 Targets for compile
----------------
+--------------------
 
 The following targets have been tested and work with these examples:
 
@@ -30,6 +30,17 @@ The following targets have been tested and work with these examples:
 	* SDT52832B
 * Other:
 	* NUCLEO_F429ZI
+
+
+Examples
+--------
+
+* Battery: Not confirmed
+* BLE: Not confirmed
+* GPS: Not confirmed
+* LED: Not confirmed
+* LTE: Not confirmed
+* WiFi: Confirmed
 
 
 Mbed OS version
