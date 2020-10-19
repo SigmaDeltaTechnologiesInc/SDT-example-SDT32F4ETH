@@ -26,7 +26,9 @@ Targets for compile
 
 The following targets have been tested and work with these examples:
 
-* ST:
+* BLE:
+	* SDT52832B
+* Other:
 	* NUCLEO_F429ZI
 
 
@@ -71,3 +73,9 @@ __To run the application on your board:__
 1. Connect your mbed board to your computer over USB. It appears as removable storage.
 
 1. When you run the `mbed compile -t GCC_ARM -m NUCLEO_F429ZI` command above, mbed cli creates a .bin or a .hex file (depending on your target) in ```BUILD/<target-name>/<toolchain>``` under the example's directory. Drag and drop the file to the removable storage.
+
+
+Reference API on Mbed OS 5.15.5
+-------------------------------
+
+Please refer to [here]https://os.mbed.com/docs/mbed-os/v5.15/apis/index.html
