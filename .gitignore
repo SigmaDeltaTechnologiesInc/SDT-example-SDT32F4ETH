@@ -4,19 +4,5 @@ projectfiles
 *.py*
 .vscode
 
-Battery/BUILD/
-Battery/mbed-os/
-
-BLE/BUILD/
-BLE/mbed-os/
-
-GPS/BUILD/
-GPS/mbed-os/
-
-LED/BUILD/
-LED/mbed-os/
-
-LTE/BUILD/
-LTE/mbed-os/
-
-WiFi/BUILD/
+BUILD/
+mbed-os/
