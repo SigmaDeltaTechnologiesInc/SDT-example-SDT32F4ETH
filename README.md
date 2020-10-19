@@ -46,7 +46,7 @@ __To build an example:__
 1. Clone the repository containing the collection of examples:
 
 	```
-	$ git clone https://github.com/SigmaDeltaTechnologiesInc/SDT-example-SDT32F4ETH.git
+	$ git clone https://github.com/SigmaDeltaTechnologiesInc/SDT-example-SDT32F4ETH
 	```
 
 1. Using a command-line tool, navigate to any of the example directories, like WiFi:
