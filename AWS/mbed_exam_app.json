@@ -32,12 +32,15 @@
             "nsapi.default-wifi-password": "\"PASSWORD\""
         },
         "NUCLEO_F429ZI":{
-            "target.network-default-interface-type": "WIFI",
+            "target.stdio_uart_tx": "PD_5",
+            "target.stdio_uart_rx": "PD_6",
+            "target.network-default-interface-type" : "WIFI",
             "nsapi.default-wifi-security": "WPA_WPA2",
             "nsapi.default-wifi-ssid": "\"SSID\"",
             "nsapi.default-wifi-password": "\"PASSWORD\"",
-            "target.stdio_uart_tx": "PD_5",
-            "target.stdio_uart_rx": "PD_6"
+            "esp8266.provide-default"               : true,
+            "esp8266.tx"                            : "PA_9",
+            "esp8266.rx"                            : "PA_10"
         }
     }
 }
