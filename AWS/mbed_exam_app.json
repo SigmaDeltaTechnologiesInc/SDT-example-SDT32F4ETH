@@ -1,0 +1,43 @@
+{
+    "config": {
+        "aws-endpoint": {
+            "help": "Endpoint name",
+            "value": ""
+        },
+        "aws-mqtt-topic": {
+            "help": "Topic to subscribe & publish to",
+            "value": "\"sdkTest/sub\""
+        },
+        "aws-client-identifier": {
+            "help": "uniq id for this thing",
+            "value": "\"SDT_IotThing\""
+        }
+    },
+    "target_overrides": {
+        "*": {
+            "mbed-trace.enable": true,
+            "mbed-trace.max-level": "TRACE_LEVEL_INFO",
+            "aws-client.log-puts": "aws_iot_puts",
+            "aws-client.log-level-global": "IOT_LOG_DEBUG",
+            "rtos.main-thread-stack-size": 8192,
+            "rtos.thread-stack-size": 2048,
+            "platform.error-filename-capture-enabled": true,
+            "platform.stdio-convert-newlines": true,
+            "platform.stdio-baud-rate": 115200
+        },
+        "DISCO_L475VG_IOT01A": {
+            "target.network-default-interface-type": "WIFI",
+            "nsapi.default-wifi-security": "WPA_WPA2",
+            "nsapi.default-wifi-ssid": "\"SSID\"",
+            "nsapi.default-wifi-password": "\"PASSWORD\""
+        },
+        "NUCLEO_F429ZI":{
+            "target.network-default-interface-type": "WIFI",
+            "nsapi.default-wifi-security": "WPA_WPA2",
+            "nsapi.default-wifi-ssid": "\"SSID\"",
+            "nsapi.default-wifi-password": "\"PASSWORD\"",
+            "target.stdio_uart_tx": "PD_5",
+            "target.stdio_uart_rx": "PD_6"
+        }
+    }
+}
