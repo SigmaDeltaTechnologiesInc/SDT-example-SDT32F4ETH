@@ -24,14 +24,8 @@ You can build the project with all supported [Mbed OS build tools](https://os.mb
 1. Clone this repository on your system, and change the current directory to where the project was cloned:
 
     ```
-    $ git clone git@github.com:armmbed/mbed-os-example-aws && cd mbed-os-example-aws
+    $ git clone https://github.com/SigmaDeltaTechnologiesInc/SDT-example-SDT32F4ETH/tree/master/AWS
     $ mbed deploy
-    ```
-
-    Alternatively, you can download the example project with Arm Mbed CLI using the `import` subcommand:
-
-    ```
-    $ mbed import mbed-os-example-aws && cd mbed-os-example-aws
     ```
 
 ## Building and running
@@ -63,11 +57,6 @@ If you have problems, you can review the [documentation](https://os.mbed.com/doc
 
 ## Related Links
 
-* [Mbed OS Stats API](https://os.mbed.com/docs/latest/apis/mbed-statistics.html).
-* [Mbed OS Configuration](https://os.mbed.com/docs/latest/reference/configuration.html).
-* [Mbed OS Serial Communication](https://os.mbed.com/docs/latest/tutorials/serial-communication.html).
-* [Mbed OS bare metal](https://os.mbed.com/docs/mbed-os/latest/reference/mbed-os-bare-metal.html).
-* [Mbed boards](https://os.mbed.com/platforms/).
 * [AWS IoT Core](https://aws.amazon.com/fr/iot-core/)
 * [AWS IoT Core - Embedded C SDK](https://github.com/aws/aws-iot-device-sdk-embedded-C/tree/v4_beta)
 
