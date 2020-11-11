@@ -67,8 +67,19 @@ Then pin names need to be configured as instructed in the drivers README file.
     },
     "target_overrides": {
         "*": {
-            "platform.stdio-convert-newlines": true,
-            "esp8266.provide-default" : false
+            "platform.stdio-baud-rate"              : 115200,
+            "platform.stdio-convert-newlines"       : true,
+            "mbed-trace.enable"                     : true
+        },
+        "NUCLEO_F429ZI": {
+            "target.stdio_uart_tx"                  : "PD_5",
+            "target.stdio_uart_rx"                  : "PD_6",
+            
+            "target.network-default-interface-type" : "WIFI",
+
+            "esp8266.provide-default"               : true,
+            "esp8266.tx"                            : "PA_9",
+            "esp8266.rx"                            : "PA_10"
         }
     }
 }

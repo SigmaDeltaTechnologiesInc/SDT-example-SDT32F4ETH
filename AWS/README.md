@@ -30,7 +30,7 @@ You can build the project with all supported [Mbed OS build tools](https://os.mb
 
 ## Building and running
 
-1. Configure the example using [`mbed_app.json`](./mbed_app.json) and add your credentials in [`aws_credentials.h`](./aws_credentials.h).
+1. Configure the example using [`mbed_exam_app.json`](./mbed_exam_app.json) for wifi configure and add your credentials in [`aws_credentials.h`](./aws_credentials.h).
 1. Connect a USB cable between the USB port on the board and the host computer.
 1. <a name="build_cmd"></a> Run the following command to build the example project, program the microcontroller flash memory, and open a serial terminal:
     ```

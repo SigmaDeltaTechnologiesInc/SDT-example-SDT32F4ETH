@@ -35,12 +35,13 @@ The following targets have been tested and work with these examples:
 Examples
 --------
 
-* Battery: Not confirmed
-* BLE: Not confirmed
-* GPS: Not confirmed
-* LED: Not confirmed
-* LTE: Not confirmed
-* WiFi: Confirmed
+* AWS: Confirmed on board
+* Battery: Not confirmed on board
+* BLE: Not confirmed on board
+* GPS: Not confirmed on board
+* LED: Not confirmed on board
+* LTE: Not confirmed on board
+* WiFi: Confirmed on board
 
 
 Mbed OS version
