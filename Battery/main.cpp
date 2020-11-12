@@ -5,24 +5,67 @@
 
 #include "mbed.h"
 
-
-// Blinking rate in milliseconds
-#define BLINKING_RATE       1000
-#define PORT_LED            PA_11
-#define PORT_BATTERY        PA_12
+#define BLINKING_RATE           5000
+#define DEFAULT_SLAVE_ADDRESS   (0x70 << 1)
+#define REG_VOLTAGE_LOW         0x08
+#define REG_VOLTAGE_HIGH        0x09
 
 
 int main()
 {
-    // Initialise the digital pin LED1 as an output
-    DigitalOut led(PORT_LED);
-    AnalogIn bat(PORT_BATTERY);
+    I2C* bat;
+    bat = new I2C(MBED_CONF_APP_BATTERY_I2C_SDA, MBED_CONF_APP_BATTERY_I2C_SCL);
+
+    uint8_t address = DEFAULT_SLAVE_ADDRESS;
+    char cmd[2];
+
+    uint8_t voltage_low = 0;
+    uint8_t voltage_high = 0;
+    uint16_t voltage = 0;
 
     while (true) {
-        led = !led;
         printf("Toggle\n");
-        printf("percentage: %3.3f%%\n", bat.read() * 100.0f);
-        printf("normalized: 0x%04X \n", bat.read_u16());
+
+        cmd[0] = REG_VOLTAGE_LOW;
+        if (bat->write(address, cmd, 1))
+        {
+            printf("Fail to send I2C write CMD\n");
+        }
+        else
+        {
+            if (bat->read(address, cmd, 1))
+            {
+                printf("Fail to send I2C read CMD\n");
+            }
+            else
+            {
+                voltage_low = cmd[0];
+                printf("voltage_low: 0x%02X\n", voltage_low);
+            }
+        }
+        ThisThread::sleep_for(10);
+        
+        cmd[0] = REG_VOLTAGE_HIGH;
+        if (bat->write(address, cmd, 1))
+        {
+            printf("Fail to send I2C write CMD\n");
+        }
+        else
+        {
+            if (bat->read(address, cmd, 1))
+            {
+                printf("Fail to send I2C read CMD\n");
+            }
+            else
+            {
+                voltage_high = cmd[0];
+                printf("voltage_high: 0x%02X\n", voltage_high);
+            }
+        }        
+
+        voltage = (voltage_high << 8) || (voltage_low);
+        printf("voltage: 0x%04X\n", voltage);
+
         ThisThread::sleep_for(BLINKING_RATE);
     }
 }

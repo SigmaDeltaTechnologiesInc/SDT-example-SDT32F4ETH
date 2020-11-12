@@ -17,6 +17,7 @@
 #include "mbed.h"
 
 WiFiInterface *wifi;
+DigitalOut io12(PC_0, 1);
 
 const char *sec2str(nsapi_security_t sec)
 {

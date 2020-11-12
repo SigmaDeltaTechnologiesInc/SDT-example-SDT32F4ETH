@@ -30,18 +30,19 @@ The following targets have been tested and work with these examples:
 	* SDT52832B
 * Other:
 	* NUCLEO_F429ZI
+	* SDT32F4ETH
 
 
 Examples
 --------
-
-* AWS: Confirmed on board
-* Battery: Not confirmed on board
-* BLE: Not confirmed on board
-* GPS: Not confirmed on board
-* LED: Not confirmed on board
-* LTE: Not confirmed on board
-* WiFi: Confirmed on board
+				Development kit		SDT32F4ETH (BLE only: SDT52832B)
+* AWS: 			Confirmed			Not confirmed
+* Battery: 		Confirmed			Not confirmed
+* BLE: 			Confirmed			Not confirmed
+* GPS: 			Not confirmed		Not confirmed
+* LED: 			Confirmed			Not confirmed
+* LTE: 			Not confirmed		Not confirmed
+* WiFi: 		Confirmed			Confirmed
 
 
 Mbed OS version
