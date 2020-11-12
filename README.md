@@ -35,14 +35,25 @@ The following targets have been tested and work with these examples:
 
 Examples
 --------
-				Development kit		SDT32F4ETH (BLE only: SDT52832B)
-* AWS: 			Confirmed			Not confirmed
-* Battery: 		Confirmed			Not confirmed
-* BLE: 			Confirmed			Not confirmed
-* GPS: 			Not confirmed		Not confirmed
-* LED: 			Confirmed			Not confirmed
-* LTE: 			Not confirmed		Not confirmed
-* WiFi: 		Confirmed			Confirmed
+					Development kit		SDT boards
+* SDT52832B
+	* BLE: 			Confirmed			Not confirmed
+
+* STM32F429
+	* AWS: 			Confirmed			Not confirmed
+	* Battery: 		Confirmed			Not confirmed
+	* GPIO: 		Confirmed			Not confirmed
+	* GPS: 			Not confirmed		Not confirmed
+	* I2C_Master: 	Not confirmed		Not confirmed
+	* LTE: 			Not confirmed		Not confirmed
+	* SPI_Master: 	Not confirmed		Not confirmed
+	* UART_Master: 	Not confirmed		Not confirmed
+	* WiFi: 		Confirmed			Confirmed
+
+* STM32L152
+	* I2C_Slave: 	Not confirmed		Not confirmed
+	* SPI_Slave: 	Not confirmed		Not confirmed
+	* UART_Slave: 	Not confirmed		Not confirmed
 
 
 Mbed OS version
