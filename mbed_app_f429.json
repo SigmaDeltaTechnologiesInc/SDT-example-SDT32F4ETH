@@ -112,35 +112,35 @@
             "help": "",
             "value": null
         },
-        "submcu_uart_tx": {
+        "l152_uart_tx": {
             "help": "",
             "value": null
         },
-        "submcu_uart_rx": {
+        "l152_uart_rx": {
             "help": "",
             "value": null
         },
-        "submcu_i2c_sda": {
+        "l152_i2c_sda": {
             "help": "EEPROM",
             "value": null
         },
-        "submcu_i2c_scl": {
+        "l152_i2c_scl": {
             "help": "EEPROM",
             "value": null
         },
-        "submcu_spi_mosi": {
+        "l152_spi_mosi": {
             "help": "",
             "value": null
         },
-        "submcu_spi_miso": {
+        "l152_spi_miso": {
             "help": "",
             "value": null
         },
-        "submcu_spi_sck": {
+        "l152_spi_sck": {
             "help": "",
             "value": null
         },
-        "submcu_spi_ss0": {
+        "l152_spi_ss0": {
             "help": "",
             "value": null
         },
@@ -249,16 +249,16 @@
             "gyro_interrupt0"                       : "PC_5",
             "gyro_interrupt1"                       : "PC_7",
 
-            "submcu_uart_tx"                        : "PA_9",
-            "submcu_uart_rx"                        : "PA_10",
+            "l152_uart_tx"                          : "PA_9",
+            "l152_uart_rx"                          : "PA_10",
 
-            "submcu_i2c_sda"                        : "PB_7",
-            "submcu_i2c_scl"                        : "PB_6",
+            "l152_i2c_sda"                          : "PB_7",
+            "l152_i2c_scl"                          : "PB_6",
 
-            "submcu_spi_mosi"                       : "PE_6",
-            "submcu_spi_miso"                       : "PE_5",
-            "submcu_spi_sck"                        : "PE_2",
-            "submcu_spi_ss0"                        : "PE_4",
+            "l152_spi_mosi"                         : "PE_6",
+            "l152_spi_miso"                         : "PE_5",
+            "l152_spi_sck"                          : "PE_2",
+            "l152_spi_ss0"                          : "PE_4",
 
             "audio_i2s_ck"                          : "PB_10",
             "audio_i2s_ws"                          : "PB_9",

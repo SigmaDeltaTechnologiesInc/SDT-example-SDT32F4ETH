@@ -1,6 +1,61 @@
 {
     "config": {
-        
+        "f429_uart_tx": {
+            "help": "",
+            "value": null
+        },
+        "f429_uart_rx": {
+            "help": "",
+            "value": null
+        },
+        "f429_i2c_sda": {
+            "help": "",
+            "value": null
+        },
+        "f429_i2c_scl": {
+            "help": "",
+            "value": null
+        },
+        "f429_spi_mosi": {
+            "help": "",
+            "value": null
+        },
+        "f429_spi_miso": {
+            "help": "",
+            "value": null
+        },
+        "f429_spi_sck": {
+            "help": "",
+            "value": null
+        },
+        "f429_spi_ss0": {
+            "help": "",
+            "value": null
+        },
+        "kickgoing_uart_tx": {
+            "help": "",
+            "value": null
+        },
+        "kickgoing_uart_rx": {
+            "help": "",
+            "value": null
+        },
+        "kickgoing_break": {
+            "help": "",
+            "value": null
+        },
+        "kickgoing_accel": {
+            "help": "",
+            "value": null
+        },
+        "kickgoing_front_led": {
+            "help": "",
+            "value": null
+        },
+        "kickgoing_bar_led": {
+            "help": "",
+            "value": null
+        }
     },
     "target_overrides": {
         "*": {
@@ -8,9 +63,27 @@
             "platform.stdio-convert-newlines"       : true,
             "mbed-trace.enable"                     : true
         },
-        "NUCLEO_F429ZI": {
+        "NUCLEO_L152RE": {
             "target.stdio_uart_tx"                  : "PC_12",
-            "target.stdio_uart_rx"                  : "PD_2"
+            "target.stdio_uart_rx"                  : "PD_2",
+
+            "f429_uart_tx"                          : "PA_2",
+            "f429_uart_rx"                          : "PA_3",
+
+            "f429_i2c_sda"                          : "PB_11",
+            "f429_i2c_scl"                          : "PB_10",
+
+            "f429_spi_mosi"                         : "PA_7",
+            "f429_spi_miso"                         : "PB_4",
+            "f429_spi_sck"                          : "PA_5",
+            "f429_spi_ss0"                          : "PC_5",
+
+            "kickgoing_uart_tx"                     : "PA_9",
+            "kickgoing_uart_rx"                     : "PA_10",
+            "kickgoing_break"                       : "PC_2",
+            "kickgoing_accel"                       : "PC_3",
+            "kickgoing_front_led"                   : "PC_1",
+            "kickgoing_bar_led"                     : "PC_6"
         }
     }
 }

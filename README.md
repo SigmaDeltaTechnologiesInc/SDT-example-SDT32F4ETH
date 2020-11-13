@@ -35,31 +35,24 @@ The following targets have been tested and work with these examples:
 
 Examples
 --------
-					Development kit		SDT boards
 * SDT52832B
-	* BLE: 			Confirmed			Not confirmed
+	* BLE: 			Not confirmed
 
 * STM32F429
-	* AWS: 			Confirmed			Not confirmed
-	* Battery: 		Confirmed			Not confirmed
-	* GPIO: 		Confirmed			Not confirmed
-	* GPS: 			Not confirmed		Not confirmed
-	* I2C_Master: 	Not confirmed		Not confirmed
-	* LTE: 			Not confirmed		Not confirmed
-	* SPI_Master: 	Not confirmed		Not confirmed
-	* UART_Master: 	Not confirmed		Not confirmed
-	* WiFi: 		Confirmed			Confirmed
+	* AWS: 			Not confirmed
+	* Battery: 		Checked, but not okay
+	* GPIO: 		Confirmed
+	* GPS: 			Confirmed
+	* I2C_Master: 	Confirmed
+	* LTE: 			Checked, but not okay
+	* SPI_Master: 	Not confirmed
+	* UART_Master: 	Not confirmed
+	* WiFi: 		Confirmed
 
 * STM32L152
-	* I2C_Slave: 	Not confirmed		Not confirmed
-	* SPI_Slave: 	Not confirmed		Not confirmed
-	* UART_Slave: 	Not confirmed		Not confirmed
-
-
-Mbed OS version
----------------
-
-* mbed-os 5.15.5 [here](https://github.com/ARMmbed/mbed-os/#6a244d7adffc0e93872cfc880e539ee11bbc6002)
+	* I2C_Slave: 	Confirmed
+	* SPI_Slave: 	Not confirmed
+	* UART_Slave: 	Not confirmed
 
 
 Building and testing the examples
@@ -97,6 +90,12 @@ __To run the application on your board:__
 1. Connect your mbed board to your computer over USB. It appears as removable storage.
 
 1. When you run the `mbed compile -t GCC_ARM -m NUCLEO_F429ZI` command above, mbed cli creates a .bin or a .hex file (depending on your target) in ```BUILD/<target-name>/<toolchain>``` under the example's directory. Drag and drop the file to the removable storage.
+
+
+Mbed OS version
+---------------
+
+* mbed-os 5.15.5 [here](https://github.com/ARMmbed/mbed-os/#6a244d7adffc0e93872cfc880e539ee11bbc6002)
 
 
 Reference API on Mbed OS 5.15.5

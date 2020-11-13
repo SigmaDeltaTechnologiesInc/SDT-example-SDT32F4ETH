@@ -5,20 +5,57 @@
 
 #include "mbed.h"
 
-
-// Blinking rate in milliseconds
-#define BLINKING_RATE       1000
-#define PORT_LED            PA_11   // F429에는 LED 없음
-
+#define SLAVE_ADDRESS   (0x50 << 1)     // 0xA0
+I2C i2c(MBED_CONF_APP_L152_I2C_SDA, MBED_CONF_APP_L152_I2C_SCL);
 
 int main()
 {
-    // Initialise the digital pin LED1 as an output
-    // DigitalOut led(PORT_LED);
+    printf("I2C Master...\n");
 
-    while (true) {
-        // led = !led;
-        printf("Toggle\n");
-        ThisThread::sleep_for(BLINKING_RATE);
+    char data_address[1] = {0x00};
+    char size_data = 7;     // "Slave1" or "Slave2"
+    char data[size_data] = {0,};
+
+    while (1)
+    {
+        /* To receive a message "Slave1" */
+        thread_sleep_for(5000);
+
+        data_address[0] = 0x01;
+        if (i2c.write(SLAVE_ADDRESS, data_address, 1))
+        {
+            printf("Fail to write\n");
+        }
+        if (i2c.read(SLAVE_ADDRESS, data, size_data))
+        {
+            printf("Fail to read\n");
+        }
+
+        printf("data = %s\n", data);
+        for (int i = 0; i < size_data; i++)
+        {
+            data[i] = 0; // Clear buffer
+        }
+
+        /* To receive a message "Slave2" */
+        thread_sleep_for(5000);
+
+        data_address[0] = 0x02;
+        if (i2c.write(SLAVE_ADDRESS, data_address, 1))
+        {
+            printf("Fail to write\n");
+        }
+        if (i2c.read(SLAVE_ADDRESS, data, size_data))
+        {
+            printf("Fail to read\n");
+        }
+
+        printf("data = %s\n", data);
+        for (int i = 0; i < size_data; i++)
+        {
+            data[i] = 0; // Clear buffer
+        }
+
+        printf("\n");
     }
 }

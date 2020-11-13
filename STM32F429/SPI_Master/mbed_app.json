@@ -1,6 +1,205 @@
 {
     "config": {
-        
+        "wifi-ssid": {
+            "help": "WiFi SSID",
+            "value": "\"SSID\""
+        },
+        "wifi-password": {
+            "help": "WiFi Password",
+            "value": "\"PASSWORD\""
+        },
+        "battery_io": {
+            "help": "Not used",
+            "value": null
+        },
+        "battery_i2c_sda": {
+            "help": "",
+            "value": null
+        },
+        "battery_i2c_scl": {
+            "help": "",
+            "value": null
+        },
+        "wifi_uart_tx": {
+            "help": "Use esp8266.tx instead of wifi_uart_tx",
+            "value": null
+        },
+        "wifi_uart_rx": {
+            "help": "Use esp8266.rx instead of wifi_uart_rx",
+            "value": null
+        },
+        "wifi_io0": {
+            "help": "",
+            "value": null
+        },
+        "wifi_rst": {
+            "help": "",
+            "value": null
+        },
+        "lte_pwr": {
+            "help": "BG96",
+            "value": null
+        },
+        "lte_rst": {
+            "help": "BG96",
+            "value": null
+        },
+        "lte_uart_tx": {
+            "help": "BG96",
+            "value": null
+        },
+        "lte_uart_rx": {
+            "help": "BG96",
+            "value": null
+        },
+        "gps_uart_tx": {
+            "help": "",
+            "value": null
+        },
+        "gps_uart_rx": {
+            "help": "",
+            "value": null
+        },
+        "bt_uart_tx": {
+            "help": "",
+            "value": null
+        },
+        "bt_uart_rx": {
+            "help": "",
+            "value": null
+        },
+        "sdcard_spi_mosi": {
+            "help": "",
+            "value": null
+        },
+        "sdcard_spi_miso": {
+            "help": "",
+            "value": null
+        },
+        "sdcard_spi_sck": {
+            "help": "",
+            "value": null
+        },
+        "sdcard_spi_ss0": {
+            "help": "",
+            "value": null
+        },
+        "sdcard_detect": {
+            "help": "",
+            "value": null
+        },
+        "gyro_spi_mosi": {
+            "help": "",
+            "value": null
+        },
+        "gyro_spi_miso": {
+            "help": "",
+            "value": null
+        },
+        "gyro_spi_sck": {
+            "help": "",
+            "value": null
+        },
+        "gyro_spi_ss0": {
+            "help": "",
+            "value": null
+        },
+        "gyro_interrupt0": {
+            "help": "",
+            "value": null
+        },
+        "gyro_interrupt1": {
+            "help": "",
+            "value": null
+        },
+        "l152_uart_tx": {
+            "help": "",
+            "value": null
+        },
+        "l152_uart_rx": {
+            "help": "",
+            "value": null
+        },
+        "l152_i2c_sda": {
+            "help": "EEPROM",
+            "value": null
+        },
+        "l152_i2c_scl": {
+            "help": "EEPROM",
+            "value": null
+        },
+        "l152_spi_mosi": {
+            "help": "",
+            "value": null
+        },
+        "l152_spi_miso": {
+            "help": "",
+            "value": null
+        },
+        "l152_spi_sck": {
+            "help": "",
+            "value": null
+        },
+        "l152_spi_ss0": {
+            "help": "",
+            "value": null
+        },
+        "audio_i2s_ck": {
+            "help": "",
+            "value": null
+        },
+        "audio_i2s_ws": {
+            "help": "",
+            "value": null
+        },
+        "audio_i2s_sd": {
+            "help": "",
+            "value": null
+        },
+        "audio_i2s_mck": {
+            "help": "",
+            "value": null
+        },
+        "audio_i2s_ckin": {
+            "help": "",
+            "value": null
+        },
+        "gpio10": {
+            "help": "",
+            "value": null
+        },
+        "gpio11": {
+            "help": "",
+            "value": null
+        },
+        "gpio12": {
+            "help": "Audio MPWR2",
+            "value": null
+        },
+        "gpio13": {
+            "help": "Audio MPWR1",
+            "value": null
+        },
+        "gpio14": {
+            "help": "Audio STBY_RST",
+            "value": null
+        },
+        "gpio15": {
+            "help": "SPK MUTE",
+            "value": null
+        },
+        "gpio16": {
+            "help": "AMP MUTE",
+            "value": null
+        },
+        "gpio17": {
+            "help": "LED ON",
+            "value": null
+        },
+        "gpio18": {
+            "help": "LCD ON",
+            "value": null
+        }
     },
     "target_overrides": {
         "*": {
@@ -10,7 +209,72 @@
         },
         "NUCLEO_F429ZI": {
             "target.stdio_uart_tx"                  : "PC_12",
-            "target.stdio_uart_rx"                  : "PD_2"
+            "target.stdio_uart_rx"                  : "PD_2",
+            
+            "target.network-default-interface-type" : "WIFI",
+            "esp8266.provide-default"               : true,
+            "esp8266.tx"                            : "PF_7",
+            "esp8266.rx"                            : "PF_6",
+
+            "battery_io"                            : "PB_5",
+            "battery_i2c_sda"                       : "PF_0",
+            "battery_i2c_scl"                       : "PF_1",
+
+            "wifi_uart_tx"                          : "PF_7",
+            "wifi_uart_rx"                          : "PF_6",
+            "wifi_io0"                              : "PC_2",
+            "wifi_rst"                              : "PC_1",
+
+            "lte_pwr"                               : "PA_1",
+            "lte_rst"                               : "PA_12",
+            "lte_uart_tx"                           : "PA_2",
+            "lte_uart_rx"                           : "PA_3",
+
+            "gps_uart_tx"                           : "PC_10",
+            "gps_uart_rx"                           : "PC_11",
+
+            "bt_uart_tx"                            : "PE_1",
+            "bt_uart_rx"                            : "PE_0",
+
+            "sdcard_spi_mosi"                       : "PB_15",
+            "sdcard_spi_miso"                       : "PB_14",
+            "sdcard_spi_sck"                        : "PB_13",
+            "sdcard_spi_ss0"                        : "PB_12",
+            "sdcard_detect"                         : "PD_13",
+
+            "gyro_spi_mosi"                         : "PA_7",
+            "gyro_spi_miso"                         : "PA_6",
+            "gyro_spi_sck"                          : "PA_5",
+            "gyro_spi_ss0"                          : "PA_8",
+            "gyro_interrupt0"                       : "PC_5",
+            "gyro_interrupt1"                       : "PC_7",
+
+            "l152_uart_tx"                          : "PA_9",
+            "l152_uart_rx"                          : "PA_10",
+
+            "l152_i2c_sda"                          : "PB_7",
+            "l152_i2c_scl"                          : "PB_6",
+
+            "l152_spi_mosi"                         : "PE_6",
+            "l152_spi_miso"                         : "PE_5",
+            "l152_spi_sck"                          : "PE_2",
+            "l152_spi_ss0"                          : "PE_4",
+
+            "audio_i2s_ck"                          : "PB_10",
+            "audio_i2s_ws"                          : "PB_9",
+            "audio_i2s_sd"                          : "PC_3",
+            "audio_i2s_mck"                         : "PC_6",
+            "audio_i2s_ckin"                        : "PC_9",
+
+            "gpio10"                                : "PD_6",
+            "gpio11"                                : "PE_3",
+            "gpio12"                                : "PF_11",
+            "gpio13"                                : "PF_12",
+            "gpio14"                                : "PF_13",
+            "gpio15"                                : "PF_14",
+            "gpio16"                                : "PF_15",
+            "gpio17"                                : "PF_2",
+            "gpio18"                                : "PF_3"
         }
     }
 }
