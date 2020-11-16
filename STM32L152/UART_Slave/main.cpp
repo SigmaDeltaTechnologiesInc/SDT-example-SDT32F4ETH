@@ -5,20 +5,38 @@
 
 #include "mbed.h"
 
+#define BLINKING_RATE   1000
 
-// Blinking rate in milliseconds
-#define BLINKING_RATE       1000
-#define PORT_LED            PA_11   // F429에는 LED 없음
+#define UART_BAUDRATE   115200
+RawSerial pc(PC_12, PD_2, UART_BAUDRATE);
+RawSerial uart(MBED_CONF_APP_F429_UART_TX, MBED_CONF_APP_F429_UART_RX, UART_BAUDRATE);
 
+char data_rx = 0;
+char data_end = 'a';
+
+void callback_rx(void)
+{
+    // You can not call 'printf' function in callback function.
+    while (uart.readable())
+    {
+        data_rx = uart.getc();
+        pc.putc(data_rx);
+        if (data_rx == '\0')
+        {
+            pc.putc('\n');
+            uart.putc(data_end);
+        }
+    }
+}
 
 int main()
 {
-    // Initialise the digital pin LED1 as an output
-    // DigitalOut led(PORT_LED);
+    pc.printf("UART L152\n");
 
-    while (true) {
-        // led = !led;
-        printf("Toggle\n");
-        ThisThread::sleep_for(BLINKING_RATE);
+    uart.attach(callback_rx, Serial::RxIrq);
+
+    while (true)
+    {
+        ThisThread::sleep_for(10);
     }
 }

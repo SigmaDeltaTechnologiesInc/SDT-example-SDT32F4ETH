@@ -46,13 +46,13 @@ Examples
 	* I2C_Master: 	Confirmed
 	* LTE: 			Checked, but not okay
 	* SPI_Master: 	Confirmed
-	* UART_Master: 	Not confirmed
+	* UART_Master: 	Confirmed
 	* WiFi: 		Confirmed
 
 * STM32L152
 	* I2C_Slave: 	Confirmed
 	* SPI_Slave: 	Confirmed
-	* UART_Slave: 	Not confirmed
+	* UART_Slave: 	Confirmed
 
 
 Building and testing the examples
