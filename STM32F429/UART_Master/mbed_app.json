@@ -208,6 +208,8 @@
             "mbed-trace.enable"                     : true
         },
         "NUCLEO_F429ZI": {
+            "target.components_add"                 : ["SD"],
+
             "target.stdio_uart_tx"                  : "PC_12",
             "target.stdio_uart_rx"                  : "PD_2",
             
@@ -239,7 +241,7 @@
             "sdcard_spi_mosi"                       : "PB_15",
             "sdcard_spi_miso"                       : "PB_14",
             "sdcard_spi_sck"                        : "PB_13",
-            "sdcard_spi_ss0"                        : "PB_12",
+            "sdcard_spi_ss0"                        : "PC_8",
             "sdcard_detect"                         : "PD_13",
 
             "gyro_spi_mosi"                         : "PA_7",

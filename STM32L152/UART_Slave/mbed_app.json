@@ -44,7 +44,7 @@
             "help": "",
             "value": null
         },
-        "kickgoing_accel": {
+        "kickgoing_throttle": {
             "help": "",
             "value": null
         },
@@ -81,7 +81,7 @@
             "kickgoing_uart_tx"                     : "PA_9",
             "kickgoing_uart_rx"                     : "PA_10",
             "kickgoing_break"                       : "PC_2",
-            "kickgoing_accel"                       : "PC_3",
+            "kickgoing_throttle"                    : "PC_3",
             "kickgoing_front_led"                   : "PC_1",
             "kickgoing_bar_led"                     : "PC_6"
         }

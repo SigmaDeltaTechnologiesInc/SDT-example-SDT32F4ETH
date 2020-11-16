@@ -45,11 +45,13 @@ Examples
 	* GPS: 			Confirmed
 	* I2C_Master: 	Confirmed
 	* LTE: 			Checked, but not okay
+	* SDCard:		Confirmed
 	* SPI_Master: 	Confirmed
 	* UART_Master: 	Confirmed
 	* WiFi: 		Confirmed
 
 * STM32L152
+	* GPIO:			Confirmed
 	* I2C_Slave: 	Confirmed
 	* SPI_Slave: 	Confirmed
 	* UART_Slave: 	Confirmed

@@ -1,4 +1,4 @@
-# mbed-os-example-wifi #
+# WiFi #
 
 Wi-Fi example for Mbed OS
 
