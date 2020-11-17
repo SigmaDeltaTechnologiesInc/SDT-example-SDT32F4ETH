@@ -36,12 +36,13 @@ The following targets have been tested and work with these examples:
 Examples
 --------
 * SDT52832B
-	* BLE: 			Not confirmed
+	* BLE: 			Confirmed
 
 * STM32F429
 	* Audio:		Confirmed
 	* AWS: 			Not confirmed
 	* Battery: 		Checked, but not okay
+	* BLE: 			Not confirmed
 	* GPIO: 		Confirmed
 	* GPS: 			Confirmed
 	* I2C_Master: 	Confirmed

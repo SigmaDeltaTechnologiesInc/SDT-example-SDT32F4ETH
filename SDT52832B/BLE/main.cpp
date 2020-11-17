@@ -1,184 +1,194 @@
-/* SDT-example-ble-uart-neo6m
- * 
- * Copyright (c) 2018 Sigma Delta Technologies Inc.
- * 
- * MIT License
- * 
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
- * 
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+/* mbed Microcontroller Library
+ * Copyright (c) 2006-2013 ARM Limited
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
-#include "mbed.h"
+#include <events/mbed_events.h>
+#include <mbed.h>
 #include "ble/BLE.h"
-#include "ble/services/UARTService.h"
+#include "LEDService.h"
 
-/* Serial */
-#define BAUDRATE 9600
-// Serial serial_Pc(USBTX, USBRX, BAUDRATE);          // Not used because the number of UART channel is only 1, UART1.
-Serial serial_gps(UART1_TX, UART1_RX, BAUDRATE);      // USBTX = UART1_TX, USBRX = UART1_RX
+#define _DEBUG_     // (회로도에서) J3쪽으로 UART 메세지를 보고 싶을 때 Enable 시킨다.
+#ifdef _DEBUG_
+    #define PRINTF printf
+#else
+    #define PRINTF
+#endif
 
-/* DigitalOut */
-#define LED_ON      0
-#define LED_OFF     1
-DigitalOut do_ledBlue(LED_BLUE, LED_OFF);
-DigitalOut* pDO_led = &do_ledBlue;
+const static char DEVICE_NAME[] = "SDT LED Test";
 
-/* Ticker */
-Ticker ticker;
+static EventQueue event_queue(/* event count */ 10 * EVENTS_EVENT_SIZE);
 
-/* EventQueue */
-EventQueue eventQueue(/* event count */ 16 * /* event size */ 32);
+class LEDDemo : ble::Gap::EventHandler
+{
+public:
+    LEDDemo(BLE &ble, events::EventQueue &event_queue) : _ble(ble),
+                                                         _event_queue(event_queue),
+                                                         _alive_led(LED_RED, 1),        // Can not use LED RED, GREEN
+                                                         _actuated_led(LED_BLUE, 0),    // Actually not used
+                                                         _led_uuid(LEDService::LED_SERVICE_UUID),
+                                                         _led_service(NULL),
+                                                         _adv_data_builder(_adv_buffer) {}
 
-/* BLE */
-#define BLE_DEVICE_NAME "SDT Device"
-BLE& ble_SDTDevice = BLE::Instance();                          // you can't use this name, 'ble', because this name is already declared in UARTService.h
+    ~LEDDemo()
+    {
+        delete _led_service;
+    }
 
-/* UART service */
-#define UARTSERVICE_WRITE_DATA_MAX  20
-UARTService* pUartService;
+    void start()
+    {
+        _ble.gap().setEventHandler(this);
+        _ble.init(this, &LEDDemo::on_init_complete);
 
-/* Variable */
-bool b_bleConnect = false;
-bool b_uartStart = false;
-unsigned char uc_rxBuf[50] = {'\0', };           // DataBuffer to write by BLE
+        _event_queue.call_every(5000, this, &LEDDemo::blink);
+        _event_queue.dispatch_forever();
+    }
 
+private:
+    /** Callback triggered when the ble initialization process has finished */
+    void on_init_complete(BLE::InitializationCompleteCallbackContext *params)
+    {
+        PRINTF("Init complete\n");
 
+        if (params->error != BLE_ERROR_NONE)
+        {
+            PRINTF("Ble initialization failed.");
+            return;
+        }
 
-void callbackTicker(void) {
-    *pDO_led = !(*pDO_led);
-}
+        _led_service = new LEDService(_ble, false);
 
-void readWriteData(void) {
-    if (b_uartStart) {
-        char data = serial_gps.getc();
+        _ble.gattServer().onDataWritten(this, &LEDDemo::on_data_written);
 
-        if (data == '$') {                              // GPS data is $GPxxxxxxxxxx
-            unsigned char rxBufIndex = 0;
+        start_advertising();
+    }
 
-            while (true) {
-                data = serial_gps.getc();
-                if (data != '$') {
-                    uc_rxBuf[rxBufIndex++] = data;
-                }
-                else {
-                    break;
-                }
+    void start_advertising()
+    {
+        /* Create advertising parameters and payload */
+
+        ble::AdvertisingParameters adv_parameters(
+            ble::advertising_type_t::CONNECTABLE_UNDIRECTED,
+            ble::adv_interval_t(ble::millisecond_t(1000)));
+
+        _adv_data_builder.setFlags();
+        _adv_data_builder.setLocalServiceList(mbed::make_Span(&_led_uuid, 1));
+        _adv_data_builder.setName(DEVICE_NAME);
+
+        /* Setup advertising */
+
+        ble_error_t error = _ble.gap().setAdvertisingParameters(
+            ble::LEGACY_ADVERTISING_HANDLE,
+            adv_parameters);
+
+        if (error)
+        {
+            PRINTF("_ble.gap().setAdvertisingParameters() failed\r\n");
+            return;
+        }
+
+        error = _ble.gap().setAdvertisingPayload(
+            ble::LEGACY_ADVERTISING_HANDLE,
+            _adv_data_builder.getAdvertisingData());
+
+        if (error)
+        {
+            PRINTF("_ble.gap().setAdvertisingPayload() failed\r\n");
+            return;
+        }
+
+        /* Start advertising */
+
+        error = _ble.gap().startAdvertising(ble::LEGACY_ADVERTISING_HANDLE);
+        PRINTF("Start advertising\n");
+
+        if (error)
+        {
+            PRINTF("_ble.gap().startAdvertising() failed\r\n");
+            return;
+        }
+    }
+
+    /**
+     * This callback allows the LEDService to receive updates to the ledState Characteristic.
+     *
+     * @param[in] params Information about the characterisitc being updated.
+     */
+    void on_data_written(const GattWriteCallbackParams *params)
+    {
+        if ((params->handle == _led_service->getValueHandle()) && (params->len == 1))
+        {
+            _actuated_led = *(params->data);
+            if (_actuated_led)
+            {
+                PRINTF("LED_BLUE is Off\n");
             }
-
-            if (pUartService) {
-                pUartService->write(uc_rxBuf, UARTSERVICE_WRITE_DATA_MAX); // Elements of first parameter(const void *_buffer) are copied to 'sendBuffer' in write() just as much second parameter(size_t length).
-                                                                                    // When the number of elements in sendBuffer is 20, the data of sendBuffer will be transmitted by BLE.
+            else
+            {
+                PRINTF("LED_BLUE is On\n");
             }
         }
     }
-}
 
-void callbackPeriodicEvent(void) {
-    if (ble_SDTDevice.gap().getState().connected) {
-        eventQueue.call(readWriteData);
-    }
-}
-
-void callbackEventsToProcess(BLE::OnEventsToProcessCallbackContext* context) {
-    eventQueue.call(Callback<void()>(&ble_SDTDevice, &BLE::processEvents));
-}
-
-void callbackBleDataWritten(const GattWriteCallbackParams* params) {
-    if ((pUartService != NULL) && (params->handle == pUartService->getTXCharacteristicHandle())) {
-        // uint16_t bytesRead = params->len;
-        const unsigned char* pBleRxBuf = params->data;
-        // serial_Pc.printf("data from BLE : %s\r\n", params->data);  // For debug
-
-        if (pBleRxBuf[0] == 's') {
-            b_uartStart = true;
-        }
-        else if (pBleRxBuf[0] == 'p') {
-            b_uartStart = false;
-        }
-    }
-}
-
-void callbackBleConnection(const Gap::ConnectionCallbackParams_t* params) {
-    // serial_Pc.printf("Connected!\n");
-    b_bleConnect = true;
-    ticker.attach(callbackTicker, 1);
-}
-
-void callbackBleDisconnection(const Gap::DisconnectionCallbackParams_t* params) {
-    // serial_Pc.printf("Disconnected!\n");
-    // serial_Pc.printf("Restarting the advertising process\n\r");
-    b_bleConnect = false;
-    b_uartStart = false;
-    ticker.detach();
-    *pDO_led = LED_ON;
-    ble_SDTDevice.gap().startAdvertising();
-}
-
-void callbackBleInitComplete(BLE::InitializationCompleteCallbackContext* params) {
-    BLE& ble = params->ble;                     // 'ble' equals ble_SDTDevice declared in global
-    ble_error_t error = params->error;          // 'error' has BLE_ERROR_NONE if the initialization procedure started successfully.
-
-    if (error == BLE_ERROR_NONE) {
-        // serial_Pc.printf("Initialization completed successfully\n");
-    }
-    else {
-        /* In case of error, forward the error handling to onBleInitError */
-        // serial_Pc.printf("Initialization failled\n");
-        return;
+    void blink()
+    {
+        PRINTF("Toggle\n");
+        _alive_led = !_alive_led;
     }
 
-    /* Ensure that it is the default instance of BLE */
-    if(ble.getInstanceID() != BLE::DEFAULT_INSTANCE) {
-        // serial_Pc.printf("ID of BLE instance is not DEFAULT_INSTANCE\n");
-        return;
+private:
+    /* Event handler */
+    void onConnectionComplete(const ble::ConnectionCompleteEvent&)
+    {
+        PRINTF("Connected!\n");
     }
 
-    /* Setup UARTService */
-    pUartService = new UARTService(ble);
+    void onDisconnectionComplete(const ble::DisconnectionCompleteEvent &)
+    {
+        PRINTF("Disconnected!\n");
+        PRINTF("Restarting the advertising process\n\r");
+        _ble.gap().startAdvertising(ble::LEGACY_ADVERTISING_HANDLE);
+    }
 
-    /* Setup and start advertising */
-    ble.gattServer().onDataWritten(callbackBleDataWritten);
-    ble.gap().onConnection(callbackBleConnection);
-    ble.gap().onDisconnection(callbackBleDisconnection);
-    ble.gap().setAdvertisingType(GapAdvertisingParams::ADV_CONNECTABLE_UNDIRECTED);
-    ble.gap().setAdvertisingInterval(1000);     // Advertising interval in units of milliseconds
-    ble.gap().accumulateAdvertisingPayload(GapAdvertisingData::BREDR_NOT_SUPPORTED);
-    ble.gap().accumulateAdvertisingPayload(GapAdvertisingData::SHORTENED_LOCAL_NAME, (const uint8_t *)BLE_DEVICE_NAME, sizeof(BLE_DEVICE_NAME) - 1);
-    ble.gap().accumulateAdvertisingPayload(GapAdvertisingData::COMPLETE_LIST_128BIT_SERVICE_IDS, (const uint8_t *)UARTServiceUUID_reversed, sizeof(UARTServiceUUID_reversed));
-    ble.gap().startAdvertising();
-    // serial_Pc.printf("Start advertising\n");
+private:
+    BLE&                            _ble;
+    events::EventQueue&             _event_queue;
+    DigitalOut                      _alive_led;
+    DigitalOut                      _actuated_led;
+
+    UUID                            _led_uuid;
+    LEDService*                     _led_service;
+
+    uint8_t                         _adv_buffer[ble::LEGACY_ADVERTISING_MAX_SIZE];
+    ble::AdvertisingDataBuilder     _adv_data_builder;
+};
+
+/** Schedule processing of events from the BLE middleware in the event queue. */
+void schedule_ble_events(BLE::OnEventsToProcessCallbackContext *context)
+{
+    event_queue.call(Callback<void()>(&context->ble, &BLE::processEvents));
 }
 
-int main(void) {
-    // serial_Pc.printf("< Sigma Delta Technologies Inc. >\n\r");
+int main()
+{
+    PRINTF("< Sigma Delta Technologies Inc. >\n\r");
 
-    /* Init BLE */
-    ble_SDTDevice.onEventsToProcess(callbackEventsToProcess);
-    ble_SDTDevice.init(callbackBleInitComplete);
+    BLE &ble = BLE::Instance();
+    ble.onEventsToProcess(schedule_ble_events);
 
-    /* Check whether IC is running or not */
-    *pDO_led = LED_ON;
-    
-    eventQueue.call_every(300, callbackPeriodicEvent);
-    eventQueue.dispatch_forever();
+    LEDDemo demo(ble, event_queue);
+    demo.start();
 
     return 0;
 }
