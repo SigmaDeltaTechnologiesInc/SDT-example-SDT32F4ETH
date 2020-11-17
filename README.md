@@ -39,6 +39,7 @@ Examples
 	* BLE: 			Not confirmed
 
 * STM32F429
+	* Audio:		Confirmed
 	* AWS: 			Not confirmed
 	* Battery: 		Checked, but not okay
 	* GPIO: 		Confirmed

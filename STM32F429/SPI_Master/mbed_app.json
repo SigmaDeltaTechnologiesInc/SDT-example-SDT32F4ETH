@@ -144,6 +144,14 @@
             "help": "",
             "value": null
         },
+        "audio_i2c_sda": {
+            "help": "",
+            "value": null
+        },
+        "audio_i2c_scl": {
+            "help": "",
+            "value": null
+        },
         "audio_i2s_ck": {
             "help": "",
             "value": null
@@ -262,6 +270,8 @@
             "l152_spi_sck"                          : "PE_2",
             "l152_spi_ss0"                          : "PE_4",
 
+            "audio_i2c_sda"                         : "PF_0",
+            "audio_i2c_scl"                         : "PF_1",
             "audio_i2s_ck"                          : "PB_10",
             "audio_i2s_ws"                          : "PB_9",
             "audio_i2s_sd"                          : "PC_3",
