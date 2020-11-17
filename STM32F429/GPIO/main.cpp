@@ -47,10 +47,12 @@ void test_gpio(void)
 
 int main()
 {
+    printf("GPIO\n");
+
     while (true) {
         led = !led;
         test_gpio();
-        printf("Toggle\n");
+        printf("\n");
         ThisThread::sleep_for(BLINKING_RATE);
     }
 }
