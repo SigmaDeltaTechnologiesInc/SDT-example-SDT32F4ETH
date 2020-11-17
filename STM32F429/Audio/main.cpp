@@ -16,7 +16,7 @@ int main()
     printf("I2C Master...\n");
 
     char data_address[1] = {0x00};
-    char size_data = 1;     // "Slave1" or "Slave2"
+    char size_data = 1;
     char data[size_data + 1] = {0,};
 
     while (1)
@@ -35,9 +35,10 @@ int main()
             printf("Fail to read\n");
         }
 
-        printf("data = %s\n", data);
+        
         for (int i = 0; i < size_data; i++)
         {
+            printf("data[%d] = 0x%02X\n", i, data[i]);
             data[i] = 0; // Clear buffer
         }
 
