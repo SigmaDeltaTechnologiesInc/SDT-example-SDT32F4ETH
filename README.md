@@ -85,9 +85,17 @@ __To build an example:__
 	```
 
 1. Run the build (Every time your code is modified):
-
+	- If NUCLEO_F429ZI,
 	```
     mbed compile -t GCC_ARM -m NUCLEO_F429ZI
+    ```
+	- If NUCLEO_L152RE,
+	```
+    mbed compile -t GCC_ARM -m NUCLEO_L152RE
+    ```
+	- If SDT52832B,
+	```
+    mbed compile -t GCC_ARM -m SDT52832B
     ```
 
 __To do list before building your code:__
