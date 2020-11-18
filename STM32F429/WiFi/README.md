@@ -43,13 +43,6 @@ Then pin names need to be configured as instructed in the drivers README file.
 
 ##  Getting started ##
 
-1. Import the example.
-
-   ```
-   mbed import mbed-os-example-wifi
-   cd mbed-os-example-wifi
-   ```
-
 1. Configure the Wi-Fi shield and settings.
    Edit ```mbed_app.json``` to include the correct Wi-Fi shield, SSID and password:
 

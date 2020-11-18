@@ -8,7 +8,7 @@
 #define BLINKING_RATE 5
 
 #define UART_BAUDRATE 115200
-RawSerial uart(MBED_CONF_APP_L152_UART_TX, MBED_CONF_APP_L152_UART_RX, UART_BAUDRATE);
+UnbufferedSerial uart(MBED_CONF_APP_L152_UART_TX, MBED_CONF_APP_L152_UART_RX, UART_BAUDRATE);
 
 char data_tx[] = "Hi L152";
 char data_rx = 0;
@@ -18,7 +18,7 @@ bool is_end = false;
 void callback_rx(void)
 {
     // You can not call 'printf' function in callback function.
-    data_rx = uart.getc();
+    uart.read(&data_rx, 1);
     if (data_rx == data_end)
     {
         is_end = true;
@@ -29,7 +29,7 @@ void callback_ticker(void)
 {
     for (size_t i = 0; i < sizeof(data_tx); i++)
     {
-        uart.putc(data_tx[i]);
+        uart.write(&data_tx[i], 1);
     }
 }
 

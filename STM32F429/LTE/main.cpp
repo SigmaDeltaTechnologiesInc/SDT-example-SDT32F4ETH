@@ -63,14 +63,14 @@ void BG96_Modem_PowerON(void)
  
     BG96_RESET = 1;
     BG96_PWRKEY = 1;
-    wait_ms(200);
+    wait_ns(200000);
  
     BG96_RESET = 0;
     BG96_PWRKEY = 0;
-    wait_ms(300);
+    wait_ns(300000);
  
     BG96_RESET = 1;
-    wait_ms(5000);
+    wait_ns(5000000);
 }
  
 NetworkInterface *iface;
@@ -353,14 +353,14 @@ void BG96_Modem_PowerON(void)
  
     BG96_RESET = 1;
     BG96_PWRKEY = 1;
-    wait_ms(200);
+    wait_ns(200000);
  
     BG96_RESET = 0;
     BG96_PWRKEY = 0;
-    wait_ms(300);
+    wait_ns(300000);
  
     BG96_RESET = 1;
-    wait_ms(5000);
+    wait_ns(5000000);
 }
 
 #if MBED_CONF_MBED_TRACE_ENABLE

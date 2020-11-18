@@ -6,6 +6,8 @@ projectfiles
 
 aws_credentials sdt.h
 mbed_app_sdt_aws.json
+mbed-os-5-15-5.lib
+mbed-os-6-3-0.lib
 
 BUILD/
 mbed-os/

@@ -8,7 +8,7 @@
 // Blinking rate in milliseconds
 #define BLINKING_RATE 1000
 
-Serial gps(MBED_CONF_APP_GPS_UART_TX, MBED_CONF_APP_GPS_UART_RX, 9600);
+BufferedSerial gps(MBED_CONF_APP_GPS_UART_TX, MBED_CONF_APP_GPS_UART_RX, 9600);
 
 int main()
 {
@@ -25,7 +25,7 @@ int main()
     {
         if (gps.readable())
         {
-            GPS_c = gps.getc();
+            gps.read(&GPS_c, 1);
 
             if (GPS_c == '$' && GPS_i > 0)
             {
