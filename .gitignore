@@ -4,5 +4,8 @@ projectfiles
 *.py*
 .vscode
 
+aws_credentials sdt.h
+mbed_app_sdt_aws.json
+
 BUILD/
 mbed-os/

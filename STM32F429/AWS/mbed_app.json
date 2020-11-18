@@ -1,0 +1,43 @@
+{
+    "config": {
+        "aws-endpoint": {
+            "help": "Endpoint name",
+            "value": "\"\""
+        },
+        "aws-mqtt-topic": {
+            "help": "Topic to subscribe & publish to",
+            "value": "\"SDT_Test/sub\""
+        },
+        "aws-client-identifier": {
+            "help": "uniq id for this thing",
+            "value": "\"SDT_IotThing\""
+        }
+    },
+    "target_overrides": {
+        "*": {
+            "mbed-trace.enable"                         : true,
+            "mbed-trace.max-level"                      : "TRACE_LEVEL_INFO",
+            "rtos.main-thread-stack-size"               : 8192,
+            "rtos.thread-stack-size"                    : 2048,
+            "platform.error-filename-capture-enabled"   : true,
+            "platform.stdio-convert-newlines"           : true,
+            "platform.stdio-baud-rate"                  : 115200,
+            
+            "aws-client.log-puts"                       : "aws_iot_puts",
+            "aws-client.log-level-global"               : "IOT_LOG_DEBUG"
+        },
+        "NUCLEO_F429ZI":{
+            "target.stdio_uart_tx"                      : "PC_12",
+            "target.stdio_uart_rx"                      : "PD_2",
+
+            "nsapi.default-wifi-security"               : "WPA_WPA2",
+            "nsapi.default-wifi-ssid"                   : "\"\"",
+            "nsapi.default-wifi-password"               : "\"\"",
+
+            "target.network-default-interface-type"     : "WIFI",
+            "esp8266.provide-default"                   : true,
+            "esp8266.tx"                                : "PF_7",
+            "esp8266.rx"                                : "PF_6"
+        }
+    }
+}

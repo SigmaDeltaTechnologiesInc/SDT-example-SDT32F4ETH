@@ -16,8 +16,9 @@ namespace aws
  * "...base64 data...\n"
  * "-----END CERTIFICATE-----";
  */
-const char rootCA[] = "-----BEGIN CERTIFICATE-----\n"
-"-----END CERTIFICATE-----";
+       const char rootCA[] = 
+"-----BEGIN CERTIFICATE-----\n"
+"-----END CERTIFICATE-----\n";
 
 
         /*
@@ -29,8 +30,9 @@ const char rootCA[] = "-----BEGIN CERTIFICATE-----\n"
  * "...base64 data...\n"
  * "-----END CERTIFICATE-----";
  */
-        const char clientCrt[] = "-----BEGIN CERTIFICATE-----\n"
-                                 "-----END CERTIFICATE-----\n";
+       const char clientCrt[] = 
+"-----BEGIN CERTIFICATE-----\n"
+"-----END CERTIFICATE-----\n";
 
         /*
  * PEM-encoded client private key.
@@ -41,8 +43,9 @@ const char rootCA[] = "-----BEGIN CERTIFICATE-----\n"
  * "...base64 data...\n"
  * "-----END RSA PRIVATE KEY-----";
  */
-        const char clientKey[] = "-----BEGIN RSA PRIVATE KEY-----\n"
-                                 "-----END RSA PRIVATE KEY-----\n";
+       const char clientKey[] = 
+"-----BEGIN RSA PRIVATE KEY-----\n"
+"-----END RSA PRIVATE KEY-----\n";
 
     } // namespace credentials
 } // namespace aws

@@ -30,21 +30,16 @@ You can build the project with all supported [Mbed OS build tools](https://os.mb
 
 ## Building and running
 
-1. Configure the example using [`mbed_exam_app.json`](./mbed_exam_app.json) for wifi configure and add your credentials in [`aws_credentials.h`](./aws_credentials.h).
+1. Configure your 'wifi configures(ssid, password)' and 'aws endpoint' in [`mbed_app.json`](./mbed_app.json).
+1. Configure your credentials(CA cert, Client cert, Client key) in [`aws_credentials.h`](./aws_credentials.h).
 1. Connect a USB cable between the USB port on the board and the host computer.
 1. <a name="build_cmd"></a> Run the following command to build the example project, program the microcontroller flash memory, and open a serial terminal:
     ```
-    $ mbed compile -m detect -t <TOOLCHAIN> --flash --sterm
+    $ mbed compile -t GCC_ARM -m NUCLEO_F429ZI
     ```
 
 Alternatively, you can manually copy the binary to the board, which you mount on the host computer over USB.
-The binary is located at `./BUILD/<TARGET>/<TOOLCHAIN>/mbed-os-example-aws.bin`.
-
-Depending on the target, you can build the example project with the `GCC_ARM` or `ARM` toolchain. After installing Arm Mbed CLI, run the command below to determine which toolchain supports your target:
-
-```
-$ mbed compile -S
-```
+The binary is located at `./BUILD/<TARGET>/<TOOLCHAIN>/AWS.bin`.
 
 ## Expected output
 
