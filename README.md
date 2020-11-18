@@ -120,7 +120,7 @@ Mbed OS version
 * mbed-os 6.3.0 [here](https://github.com/ARMmbed/mbed-os/#0db72d0cf26539016efbe38f80d6f2cb7a3d4414)
 
 
-Reference API on Mbed OS 5.15.5
+Reference API on Mbed OS 6.3.0
 -------------------------------
 
 Please refer to [here](https://os.mbed.com/docs/mbed-os/v6.3/apis/index.html)
