@@ -70,7 +70,7 @@ __To build an example:__
 	$ git clone https://github.com/SigmaDeltaTechnologiesInc/SDT-example-SDT32F4ETH
 	```
 
-1. Using a command-line tool, navigate to any of the example directories, like GPIO:
+1. Using a command-line tool, navigate to any of the example directories:
 
 	```
 	$ cd SDT-example-SDT32F4ETH
