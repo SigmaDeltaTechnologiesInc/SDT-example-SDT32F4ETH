@@ -74,14 +74,16 @@ int main()
 
     bat = new I2C(MBED_CONF_APP_BATTERY_I2C_SDA, MBED_CONF_APP_BATTERY_I2C_SCL);
 
-    uint8_t address = DEFAULT_SLAVE_ADDRESS;
-    char cmd[2];
-    char data[1];
-
     uint8_t data_temp = 0;
     uint8_t voltage_low = 0;
     uint8_t voltage_high = 0;
     uint16_t voltage = 0;
+
+    char cmd[2];
+    cmd[0] = REG_MODE;
+    cmd[1] = 0x10;      // GG_RUN -> 0: standby mode, 1: operating mode
+    bat->write(DEFAULT_SLAVE_ADDRESS, cmd, 2);
+    ThisThread::sleep_for(4000);
 
     while (true)
     {

@@ -41,7 +41,7 @@ Examples
 * STM32F429
 	* Audio:		Confirmed
 	* AWS: 			Confirmed
-	* Battery: 		Confirmed, but battery value is always 0
+	* Battery: 		Confirmed
 	* BLE: 			Confirmed
 	* GPIO: 		Confirmed
 	* GPS: 			Confirmed
