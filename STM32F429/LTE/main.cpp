@@ -1,31 +1,3 @@
-#if 0
-/* mbed Microcontroller Library
- * Copyright (c) 2019 ARM Limited
- * SPDX-License-Identifier: Apache-2.0
- */
-
-#include "mbed.h"
-
-
-// Blinking rate in milliseconds
-#define BLINKING_RATE       1000
-#define PORT_LED            PA_11
-
-
-int main()
-{
-    // Initialise the digital pin LED1 as an output
-    DigitalOut led(PORT_LED);
-
-    while (true) {
-        led = !led;
-        printf("Toggle\n");
-        ThisThread::sleep_for(BLINKING_RATE);
-    }
-}
-
-#else
-
 #if 1
 
 /*
@@ -63,14 +35,14 @@ void BG96_Modem_PowerON(void)
  
     BG96_RESET = 1;
     BG96_PWRKEY = 1;
-    wait_ns(200000);
+    thread_sleep_for(200);
  
     BG96_RESET = 0;
     BG96_PWRKEY = 0;
-    wait_ns(300000);
+    thread_sleep_for(3000);
  
     BG96_RESET = 1;
-    wait_ns(5000000);
+    thread_sleep_for(5000);
 }
  
 NetworkInterface *iface;
@@ -271,12 +243,12 @@ int main()
     dot_thread.start(dot_event);
 #endif // #if MBED_CONF_MBED_TRACE_ENABLE
  
-    // sim pin, apn, credentials and possible plmn are taken atuomtically from json when using get_default_instance()
+    // sim pin, apn, credentials and possible plmn are taken automatically from json when using get_default_instance()
     iface = NetworkInterface::get_default_instance();
     MBED_ASSERT(iface);
  
     nsapi_error_t retcode = NSAPI_ERROR_NO_CONNECTION;
- 
+
     /* Attempt to connect to a cellular network */
     if (do_connect() == NSAPI_ERROR_OK) {
         retcode = test_send_recv();
@@ -615,7 +587,5 @@ int main()
     return 0;
 }
 // EOF
-
-#endif
 
 #endif
