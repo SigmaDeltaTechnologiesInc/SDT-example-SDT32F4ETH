@@ -31,8 +31,8 @@
             "cellular.debug-at"                     : true,
             "cellular.use-apn-lookup"               : true,
             "nsapi.default-cellular-plmn"           : 0,
-            "nsapi.default-cellular-sim-pin"        : "\"1234\"",
-            "nsapi.default-cellular-apn"            : "\"lte.ktfwing.com\"",
+            "nsapi.default-cellular-sim-pin"        : "\"0000\"",
+            "nsapi.default-cellular-apn"            : "\"\"",
             "nsapi.default-cellular-username"       : 0,
             "nsapi.default-cellular-password"       : 0,
             "QUECTEL_BG96.provide-default"          : true
