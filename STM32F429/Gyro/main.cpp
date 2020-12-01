@@ -4,44 +4,35 @@
  */
 
 #include "mbed.h"
-
-#define SPI_MODE 0
+#include "LSM6DS3.h"
 
 SPI spi(MBED_CONF_APP_GYRO_SPI_MOSI, MBED_CONF_APP_GYRO_SPI_MISO, MBED_CONF_APP_GYRO_SPI_SCK); // mosi, miso, sclk
-DigitalOut cs(MBED_CONF_APP_GYRO_SPI_SS0);
+DigitalOut cs(MBED_CONF_APP_GYRO_SPI_SS0, 0);
+
+LSM6DS3 gyro(SPI_MODE, &spi, &cs);
 
 int main()
 {
-    printf("Hi, Master! \r\n");
+    printf("Hi, Gyro! \r\n");
 
-    // Chip must be deselected
-    cs = 1;
-    thread_sleep_for(1000);
+    int16_t gyro_raw_x = 0;
+    int16_t gyro_raw_y = 0;
+    int16_t gyro_raw_z = 0;
 
-    // Setup the spi for 8 bit data, high steady state clock,
-    // second edge capture, with a 1MHz clock rate
-    spi.format(8, SPI_MODE);
-    spi.frequency(1000000);
-
-    int send_byte = 0xA0;
-    int receive_byte = 0;
-
+    status_t ret = gyro.begin();
+    printf("ret : %d\n", ret);
+    
     while (1)
     {
         thread_sleep_for(5000);
 
-        // Select the device by seting chip select low
-        cs = 0;
+        gyro_raw_x = gyro.readRawGyroX();
+        gyro_raw_y = gyro.readRawGyroY();
+        gyro_raw_z = gyro.readRawGyroZ();
 
-        // Send a byte to receive the data in full duplex mode.
-        receive_byte = spi.write(send_byte);
-
-        // Deselect the device
-        cs = 1;
-
-        printf("Master send : 0x%X\r\n", send_byte);
-        printf("Master received: 0x%X\r\n", receive_byte);
-
-        send_byte++;
+        printf("gyro_raw_x : %d\n", gyro_raw_x);
+        printf("gyro_raw_y : %d\n", gyro_raw_y);
+        printf("gyro_raw_z : %d\n", gyro_raw_z);
+        printf("\n");
     }
 }

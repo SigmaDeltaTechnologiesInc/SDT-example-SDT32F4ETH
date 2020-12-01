@@ -45,9 +45,9 @@ Examples
 	* BLE: 			Confirmed
 	* GPIO: 		Confirmed
 	* GPS: 			Confirmed
-	* Gyro:			Not confirmed
+	* Gyro:			Confirmed
 	* I2C_Master: 	Confirmed
-	* LTE: 			Checked, but not okay
+	* LTE: 			Confirmed
 	* SDCard:		Confirmed
 	* SPI_Master: 	Confirmed
 	* UART_Master: 	Confirmed
