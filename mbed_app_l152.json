@@ -61,7 +61,8 @@
         "*": {
             "platform.stdio-baud-rate"              : 115200,
             "platform.stdio-convert-newlines"       : true,
-            "mbed-trace.enable"                     : true
+            "mbed-trace.enable"                     : true,
+            "target.printf_lib"                     : "std"
         },
         "NUCLEO_L152RE": {
             "target.stdio_uart_tx"                  : "PC_12",

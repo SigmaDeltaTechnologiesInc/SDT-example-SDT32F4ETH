@@ -27,7 +27,7 @@ typedef enum
 
 typedef enum
 {
-    REG_ID0                    = 0x18,
+    REG_ID0                     = 0x18,
     REG_ID1,
     REG_ID2,
     REG_ID3,
@@ -112,8 +112,8 @@ int main()
         }
         printf("\n");
 
-        voltage = (voltage_high << 8) | (voltage_low);
-        printf("voltage: 0x%04X\n", voltage);
+        voltage = ((uint16_t)voltage_high << 8) | (voltage_low);
+        printf("voltage: 0x%04X (%.0f mV)\n", voltage, (float)voltage * 2.44);
         printf("\n");
         ThisThread::sleep_for(BLINKING_RATE);
     }

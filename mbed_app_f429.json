@@ -213,7 +213,8 @@
         "*": {
             "platform.stdio-baud-rate"              : 115200,
             "platform.stdio-convert-newlines"       : true,
-            "mbed-trace.enable"                     : true
+            "mbed-trace.enable"                     : true,
+            "target.printf_lib"                     : "std"
         },
         "NUCLEO_F429ZI": {
             "target.components_add"                 : ["SD"],
