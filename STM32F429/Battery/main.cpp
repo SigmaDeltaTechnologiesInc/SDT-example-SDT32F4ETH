@@ -113,7 +113,7 @@ int main()
         printf("\n");
 
         voltage = ((uint16_t)voltage_high << 8) | (voltage_low);
-        printf("voltage: 0x%04X (%.0f mV)\n", voltage, (float)voltage * 2.44);
+        printf("voltage: 0x%04X (%.0f mV)\n", voltage, (float)voltage * 2.44);  // Resolution 2.44mV
         printf("\n");
         ThisThread::sleep_for(BLINKING_RATE);
     }
