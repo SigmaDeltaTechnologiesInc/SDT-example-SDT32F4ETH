@@ -25,11 +25,13 @@
  
 // Number of retries /
 #define RETRY_COUNT 3
- 
+
+DigitalOut pwr_en(MBED_CONF_APP_LTE_PWR_EN, 1);
+
 void BG96_Modem_PowerON(void)
 {
-    DigitalOut BG96_RESET(PA_12);
-    DigitalOut BG96_PWRKEY(PA_1);
+    DigitalOut BG96_RESET(MBED_CONF_APP_LTE_RST);
+    DigitalOut BG96_PWRKEY(MBED_CONF_APP_LTE_PWR);
  
     BG96_RESET = 1;
     BG96_PWRKEY = 1;

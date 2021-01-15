@@ -10,6 +10,8 @@ extern "C" {
 #include "iot_mqtt.h"
 }
 
+DigitalOut pwr_en(MBED_CONF_APP_WIFI_PWR_EN, 1);
+
 // debugging facilities
 #define TRACE_GROUP "Main"
 static Mutex trace_mutex;

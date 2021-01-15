@@ -9,6 +9,7 @@
 #define BLINKING_RATE 1000
 
 BufferedSerial gps(MBED_CONF_APP_GPS_UART_TX, MBED_CONF_APP_GPS_UART_RX, 9600);
+DigitalOut pwr_en(MBED_CONF_APP_GPS_PWR_EN, 1);
 
 int main()
 {

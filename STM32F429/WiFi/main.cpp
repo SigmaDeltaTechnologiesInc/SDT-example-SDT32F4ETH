@@ -17,7 +17,7 @@
 #include "mbed.h"
 
 WiFiInterface *wifi;
-DigitalOut io12(PC_0, 1);
+DigitalOut pwr_en(MBED_CONF_APP_WIFI_PWR_EN, 1);
 
 const char *sec2str(nsapi_security_t sec)
 {
@@ -93,8 +93,8 @@ int main()
         return -1;
     }
 
-    printf("\nConnecting to %s...\n", MBED_CONF_APP_WIFI_SSID);
-    int ret = wifi->connect(MBED_CONF_APP_WIFI_SSID, MBED_CONF_APP_WIFI_PASSWORD, NSAPI_SECURITY_WPA_WPA2);
+    printf("\nConnecting to %s...\n", MBED_CONF_NSAPI_DEFAULT_WIFI_SSID);
+    int ret = wifi->connect(MBED_CONF_NSAPI_DEFAULT_WIFI_SSID, MBED_CONF_NSAPI_DEFAULT_WIFI_PASSWORD, NSAPI_SECURITY_WPA_WPA2);
     if (ret != 0) {
         printf("\nConnection error: %d\n", ret);
         return -1;

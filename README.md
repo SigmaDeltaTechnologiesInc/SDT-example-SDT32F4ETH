@@ -35,29 +35,30 @@ The following targets have been tested and work with these examples:
 
 Examples
 --------
-* SDT52832B
-	* BLE: 			Confirmed
 
-* STM32F429
-	* Audio:		Confirmed
-	* AWS: 			Confirmed
-	* Battery: 		Confirmed
-	* BLE: 			Confirmed
-	* GPIO: 		Confirmed
-	* GPS: 			Confirmed
-	* Gyro:			Confirmed
-	* I2C_Master: 	Confirmed
-	* LTE: 			Confirmed
-	* SDCard:		Confirmed
-	* SPI_Master: 	Confirmed
-	* UART_Master: 	Confirmed
-	* WiFi: 		Confirmed
-
-* STM32L152
-	* GPIO:			Confirmed
-	* I2C_Slave: 	Confirmed
-	* SPI_Slave: 	Confirmed
-	* UART_Slave: 	Confirmed
+Board				|  Functions		|  H/W Ver.01		| H/W Ver.02		| Notes
+--------------------|-------------------|-------------------|-------------------|---------------
+STM32F429			|Audio				|Confirmed			|Not confirmed		|Codec IC changed
+					|AWS				|Confirmed			|Confirmed			|
+					|Battery			|Confirmed			|Confirmed			|
+					|BLE				|Confirmed			|Confirmed			|
+					|GPIO				|Confirmed			|Confirmed			|
+					|GPS				|Confirmed			|Confirmed			|
+					|Gyro				|Confirmed			|Confirmed			|
+					|I2C_Master			|Confirmed			|Not supported		|
+					|LCD				|Not supported		|Confirmed			|
+					|LTE				|Confirmed			|Confirmed			|
+					|SDCard				|Confirmed			|Not supported		|
+					|SPI_Master			|Confirmed			|Not confirmed		|EEPROM
+					|UART_Master		|Confirmed			|Confirmed			|
+					|WiFi				|Confirmed			|Confirmed			|
+--------------------|-------------------|-------------------|-------------------|---------------
+STM32L152			|GPIO				|Confirmed			|Confirmed			|
+					|I2C_Slave			|Confirmed			|Not supported		|
+					|SPI_Slave			|Confirmed			|Not supported		|
+					|UART_Slave			|Confirmed			|Confirmed			|
+--------------------|-------------------|-------------------|-------------------|---------------
+SDT52832B			|BLE				|Confirmed			|Confirmed			|
 
 
 Building and testing the examples
