@@ -36,7 +36,7 @@ The following targets have been tested and work with these examples:
 Examples
 --------
 
-* STM32F429
+STM32F429
 Functions		| H/W Ver.01	| H/W Ver.02	| Notes
 ----------------|---------------|---------------|---------------
 Audio			|Confirmed		|Not confirmed	|Codec IC changed
@@ -54,7 +54,7 @@ SDCard			|Confirmed		|Not supported	|
 UART_Master		|Confirmed		|Confirmed		|
 WiFi			|Confirmed		|Confirmed		|
 
-* STM32L152
+STM32L152
 Functions		| H/W Ver.01	| H/W Ver.02	| Notes
 ----------------|---------------|---------------|---------------
 GPIO			|Confirmed		|Confirmed		|
@@ -62,7 +62,7 @@ I2C_Slave		|Confirmed		|Not supported	|
 SPI_Slave		|Confirmed		|Not supported	|
 UART_Slave		|Confirmed		|Confirmed		|
 
-* SDT52832B
+SDT52832B
 Functions		| H/W Ver.01	| H/W Ver.02	| Notes
 ----------------|---------------|---------------|---------------
 BLE				|Confirmed		|Confirmed		|
