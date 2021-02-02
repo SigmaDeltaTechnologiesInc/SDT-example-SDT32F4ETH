@@ -36,29 +36,36 @@ The following targets have been tested and work with these examples:
 Examples
 --------
 
-Board				|  Functions		|  H/W Ver.01		| H/W Ver.02		| Notes
---------------------|-------------------|-------------------|-------------------|---------------
-STM32F429			|Audio				|Confirmed			|Not confirmed		|Codec IC changed
-					|AWS				|Confirmed			|Confirmed			|
-					|Battery			|Confirmed			|Confirmed			|
-					|BLE				|Confirmed			|Confirmed			|
-					|GPIO				|Confirmed			|Confirmed			|
-					|GPS				|Confirmed			|Confirmed			|
-					|Gyro				|Confirmed			|Confirmed			|
-					|I2C_Master			|Confirmed			|Not supported		|
-					|LCD				|Not supported		|Confirmed			|
-					|LTE				|Confirmed			|Confirmed			|
-					|SDCard				|Confirmed			|Not supported		|
-					|SPI_Master			|Confirmed			|Not confirmed		|EEPROM
-					|UART_Master		|Confirmed			|Confirmed			|
-					|WiFi				|Confirmed			|Confirmed			|
---------------------|-------------------|-------------------|-------------------|---------------
-STM32L152			|GPIO				|Confirmed			|Confirmed			|
-					|I2C_Slave			|Confirmed			|Not supported		|
-					|SPI_Slave			|Confirmed			|Not supported		|
-					|UART_Slave			|Confirmed			|Confirmed			|
---------------------|-------------------|-------------------|-------------------|---------------
-SDT52832B			|BLE				|Confirmed			|Confirmed			|
+STM32F429
+Functions		| H/W Ver.01 		| H/W Ver.02		| Notes
+------------------------|-----------------------|-----------------------|---------------
+Audio			|Confirmed		|Not confirmed		|Codec IC changed
+AWS			|Confirmed		|Confirmed		|
+Battery			|Confirmed		|Confirmed		|
+BLE			|Confirmed		|Confirmed		|
+EEPROM			|Confirmed		|Confirmed		|
+GPIO			|Confirmed		|Confirmed		|
+GPS			|Confirmed		|Confirmed		|
+Gyro			|Confirmed		|Confirmed		|
+I2C_Master		|Confirmed		|Not supported		|
+LCD			|Not supported		|Confirmed		|
+LTE			|Confirmed		|Confirmed		|
+SDCard			|Confirmed		|Not supported		|
+UART_Master		|Confirmed		|Confirmed		|
+WiFi			|Confirmed		|Confirmed		|
+
+STM32L152
+Functions		| H/W Ver.01 		| H/W Ver.02		| Notes
+------------------------|-----------------------|-----------------------|---------------
+GPIO			|Confirmed		|Confirmed		|
+I2C_Slave		|Confirmed		|Not supported		|
+SPI_Slave		|Confirmed		|Not supported		|
+UART_Slave		|Confirmed		|Confirmed		|
+
+SDT52832B
+Functions		| H/W Ver.01 		| H/W Ver.02		| Notes
+------------------------|-----------------------|-----------------------|---------------
+BLE			|Confirmed		|Confirmed		|
 
 
 Building and testing the examples
