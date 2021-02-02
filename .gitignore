@@ -1,8 +1,8 @@
 .build
-.mbed
 projectfiles
 *.py*
 .vscode
+!.mbed
 
 aws_credentials sdt.h
 mbed_app_sdt_aws.json
