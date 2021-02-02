@@ -19,6 +19,7 @@
 #include "UDPSocket.h"
 #include "CellularLog.h"
 #include "CellularDevice.h"
+#include "AT_CellularNetwork.h"
  
 #define UDP 0
 #define TCP 1
@@ -136,6 +137,12 @@ nsapi_error_t do_connect()
             print_function("\n\nAuthentication Failure. Exiting application\n");
         } else if (retcode == NSAPI_ERROR_OK) {
             print_function("\n\nConnection Established.\n");
+
+            int rssi2 = 0;
+            CellularDevice *dev2 = CellularDevice::get_default_instance();
+            dev2->open_network()->get_signal_quality(rssi2);
+            printf("\n\nRSSI2: %d\n\n", rssi2);
+            
         } else if (retry_counter > RETRY_COUNT) {
             print_function("\n\nFatal connection failure: %d\n", retcode);
         } else {
@@ -252,7 +259,16 @@ int main()
 
     /* Attempt to connect to a cellular network */
     if (do_connect() == NSAPI_ERROR_OK) {
-        retcode = test_send_recv();
+        // retcode = test_send_recv();
+    }
+
+    int rssi = 0;
+    CellularDevice* dev = CellularDevice::get_default_instance();
+    while(true)
+    {
+        dev->open_network()->get_signal_quality(rssi);
+        printf("\n\nRSSI: %d\n\n", rssi);
+        ThisThread::sleep_for(5s);
     }
  
     if (iface->disconnect() != NSAPI_ERROR_OK) {

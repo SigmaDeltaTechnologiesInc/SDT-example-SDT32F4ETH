@@ -763,9 +763,10 @@ int main()
     ThisThread::sleep_for(2ms);
 
     ak4954_upd_bits(AK4954_REG_SIG_SEL_1, AK4954_DACSL_MASK, AK4954_DACSL);
+    // ak4954_upd_bits(AK4954_REG_SIG_SEL_1, AK4954_MGAIN_MASK, AK4954_MGAIN_0DB);
     ak4954_upd_bits(AK4954_REG_SIG_SEL_2, 0xC0, 0xC0);
-    ak4954_reg_write(AK4954_REG_DVL_CTRL, 0x00);
-    ak4954_reg_write(AK4954_REG_DVR_CTRL, 0x00);
+    ak4954_reg_write(AK4954_REG_DVL_CTRL, 0x30);    // L
+    ak4954_reg_write(AK4954_REG_DVR_CTRL, 0x90);    // R
     ak4954_upd_bits(AK4954_REG_PM1, AK4954_PMDAC_MASK, AK4954_PMDAC);
     ak4954_upd_bits(AK4954_REG_PM2, AK4954_PMSL_MASK, AK4954_PMSL);
     ThisThread::sleep_for(30ms);
@@ -837,6 +838,8 @@ I2C i2c(MBED_CONF_APP_AUDIO_I2C_SDA, MBED_CONF_APP_AUDIO_I2C_SCL);
 DigitalOut codecReset(MBED_CONF_APP_AUDIO_CODEC_RST, 0);
 DigitalOut ampOn(MBED_CONF_APP_AUDIO_AMP_MUTE, 0);
 DigitalOut spkOn(MBED_CONF_APP_AUDIO_TPA_MUTE, 0);
+
+// DigitalOut dpin(MBED_CONF_APP_AUDIO_I2S_SD, 0);
 
 int main()
 {
